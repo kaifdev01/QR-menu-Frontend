@@ -1,15 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Poppins, Playfair_Display, Montserrat, Roboto, Lora, Open_Sans, Merriweather, Raleway, Nunito, Crimson_Text } from "next/font/google";
 import "./globals.css";
+import AuthProvider from "@/components/AuthProvider";
+import { Toaster } from 'react-hot-toast';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+const poppins = Poppins({ variable: "--font-poppins", weight: ['400', '600', '700'], subsets: ["latin"] });
+const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"] });
+const montserrat = Montserrat({ variable: "--font-montserrat", subsets: ["latin"] });
+const roboto = Roboto({ variable: "--font-roboto", weight: ['400', '500', '700'], subsets: ["latin"] });
+const lora = Lora({ variable: "--font-lora", subsets: ["latin"] });
+const opensans = Open_Sans({ variable: "--font-opensans", subsets: ["latin"] });
+const merriweather = Merriweather({ variable: "--font-merriweather", weight: ['400', '700'], subsets: ["latin"] });
+const raleway = Raleway({ variable: "--font-raleway", subsets: ["latin"] });
+const nunito = Nunito({ variable: "--font-nunito", subsets: ["latin"] });
+const crimsonText = Crimson_Text({ variable: "--font-crimson", weight: ['400', '600', '700'], subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -20,9 +24,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${poppins.variable} ${playfair.variable} ${montserrat.variable} ${roboto.variable} ${lora.variable} ${opensans.variable} ${merriweather.variable} ${raleway.variable} ${nunito.variable} ${crimsonText.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>
+          <Toaster position="top-right" />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
