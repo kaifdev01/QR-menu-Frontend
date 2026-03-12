@@ -8,7 +8,7 @@ const API_CONFIG = {
   ENDPOINTS: {
     // Auth
     AUTH: {
-      SIGNUP: '/auth/signup',
+      SIGNUP: '/api/auth/signup',
       LOGIN: '/api/auth/login',
       VERIFY_OTP: '/api/auth/verify-otp',
       RESEND_OTP: '/api/auth/resend-otp',
