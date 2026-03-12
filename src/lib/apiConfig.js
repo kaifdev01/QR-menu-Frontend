@@ -2,37 +2,38 @@
 const API_CONFIG = {
   // Base URL for API requests
   BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'https://qr-menu-backend-blond.vercel.app',
-  
+  // BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
+
   // API Endpoints
   ENDPOINTS: {
     // Auth
     AUTH: {
-      SIGNUP: '/api/auth/signup',
+      SIGNUP: '/auth/signup',
       LOGIN: '/api/auth/login',
       VERIFY_OTP: '/api/auth/verify-otp',
       RESEND_OTP: '/api/auth/resend-otp',
       GOOGLE_SIGNIN: '/api/auth/google-signin',
     },
-    
+
     // User
     USER: {
       UPDATE_PROFILE: '/api/user/update-profile',
       CHANGE_PASSWORD: '/api/user/change-password',
       DELETE_ACCOUNT: '/api/user/delete-account',
     },
-    
+
     // Restaurant
     RESTAURANT: {
       SETUP: '/api/restaurant/setup',
       INFO: '/api/restaurant/info',
     },
-    
+
     // Subscription
     SUBSCRIPTION: {
       SELECT_PLAN: '/api/subscription/select-plan',
       DETAILS: '/api/subscription/details',
     },
-    
+
     // Menu
     MENU: {
       CREATE: '/api/menu/create',
@@ -48,7 +49,7 @@ const API_CONFIG = {
       DUPLICATE: (id) => `/api/menu/${id}/duplicate`,
       PUBLIC: (uniqueUrl) => `/api/public/menu/${uniqueUrl}`,
     },
-    
+
     // Upload
     UPLOAD: {
       IMAGE: '/api/upload/upload',
@@ -64,7 +65,7 @@ export const buildUrl = (endpoint) => {
 // Helper function for authenticated requests
 export const fetchWithAuth = async (endpoint, options = {}) => {
   const token = localStorage.getItem('token');
-  
+
   const defaultHeaders = {
     'Content-Type': 'application/json',
     ...(token && { 'Authorization': `Bearer ${token}` }),
