@@ -1,7 +1,7 @@
 // API Configuration
 const API_CONFIG = {
   // Base URL for API requests
-  BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
+  BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'https://qr-menu-backend-blond.vercel.app',
   
   // API Endpoints
   ENDPOINTS: {
