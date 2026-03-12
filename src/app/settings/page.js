@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import { User, Store, CreditCard, Lock, Trash2, Save, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
+import API_CONFIG from '@/lib/apiConfig';
+
 
 export default function SettingsPage() {
   const [user, setUser] = useState(null);
@@ -18,7 +20,7 @@ export default function SettingsPage() {
     name: '',
     email: ''
   });
-
+  console.log(API_CONFIG.BASE_URL)
   // Restaurant form
   const [restaurantForm, setRestaurantForm] = useState({
     name: '',
@@ -56,7 +58,7 @@ export default function SettingsPage() {
   const fetchRestaurantInfo = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/restaurant/info', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/restaurant/info`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -71,7 +73,7 @@ export default function SettingsPage() {
   const fetchSubscription = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/subscription/details', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/subscription/details`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -89,7 +91,7 @@ export default function SettingsPage() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/user/update-profile', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/user/update-profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +123,7 @@ export default function SettingsPage() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/restaurant/setup', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/restaurant/setup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -161,7 +163,7 @@ export default function SettingsPage() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/user/change-password', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/user/change-password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -205,7 +207,7 @@ export default function SettingsPage() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/user/delete-account', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/user/delete-account`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -252,11 +254,10 @@ export default function SettingsPage() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
-                      activeTab === tab.id
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${activeTab === tab.id
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
+                      }`}
                   >
                     <Icon className="w-5 h-5" />
                     <span className="font-semibold">{tab.label}</span>
@@ -389,7 +390,7 @@ export default function SettingsPage() {
               {activeTab === 'subscription' && (
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-6">Subscription Details</h2>
-                  
+
                   {subscription ? (
                     <div className="space-y-6">
                       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
@@ -398,11 +399,10 @@ export default function SettingsPage() {
                             <h3 className="text-xl font-bold text-gray-900">{subscription.planName}</h3>
                             <p className="text-gray-600">Current Plan</p>
                           </div>
-                          <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-                            subscription.status === 'active' ? 'bg-green-100 text-green-700' :
+                          <span className={`px-4 py-2 rounded-full text-sm font-semibold ${subscription.status === 'active' ? 'bg-green-100 text-green-700' :
                             subscription.status === 'trial' ? 'bg-blue-100 text-blue-700' :
-                            'bg-gray-100 text-gray-700'
-                          }`}>
+                              'bg-gray-100 text-gray-700'
+                            }`}>
                             {subscription.status.charAt(0).toUpperCase() + subscription.status.slice(1)}
                           </span>
                         </div>
@@ -468,7 +468,7 @@ export default function SettingsPage() {
               {activeTab === 'security' && (
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-6">Security Settings</h2>
-                  
+
                   {/* Change Password */}
                   <div className="mb-8">
                     <h3 className="text-lg font-bold text-gray-900 mb-4">Change Password</h3>
